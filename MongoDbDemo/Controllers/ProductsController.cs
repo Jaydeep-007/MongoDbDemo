@@ -14,8 +14,10 @@ namespace MongoDbDemo.Controllers
             this.productService = productService;
 
         [HttpGet]
-        public async Task<List<ProductDetails>> Get() =>
-            await productService.ProductListAsync();
+        public async Task<List<ProductDetails>> Get()
+        {
+            return await productService.ProductListAsync();
+        }
 
         [HttpGet("{productId:length(24)}")]
         public async Task<ActionResult<ProductDetails>> Get(string productId)
@@ -52,7 +54,7 @@ namespace MongoDbDemo.Controllers
 
             await productService.UpdateProductAsync(productId, productDetails);
 
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{productId:length(24)}")]
@@ -67,7 +69,7 @@ namespace MongoDbDemo.Controllers
 
             await productService.DeleteProductAsync(productId);
 
-            return NoContent();
+            return Ok();
         }
     }
 }
